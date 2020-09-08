@@ -17,7 +17,73 @@
           exact
         >
           <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
+            <svg width="48" height="48" viewBox="0 0 48 48">
+              <g transform="translate(12 14)" fill="none" fill-rule="evenodd">
+                <rect
+                  stroke="#004976"
+                  stroke-width="1.5"
+                  fill-opacity="0.64"
+                  fill="#00D8F6"
+                  x="0.75"
+                  y="3.75"
+                  width="22.5"
+                  height="16.5"
+                  rx="2"
+                ></rect>
+                <path fill="#004976" d="M1 4h22v4H1z"></path>
+                <rect fill="#004976" x="20" width="2" height="5" rx="1"></rect>
+                <rect fill="#004976" x="11" width="2" height="5" rx="1"></rect>
+                <rect fill="#004976" x="2" width="2" height="5" rx="1"></rect>
+                <rect
+                  fill="#004976"
+                  x="16"
+                  y="15"
+                  width="4"
+                  height="2"
+                  rx="0.5"
+                ></rect>
+                <rect
+                  fill="#004976"
+                  x="10"
+                  y="15"
+                  width="4"
+                  height="2"
+                  rx="0.5"
+                ></rect>
+                <rect
+                  fill="#004976"
+                  x="4"
+                  y="15"
+                  width="4"
+                  height="2"
+                  rx="0.5"
+                ></rect>
+                <rect
+                  fill="#004976"
+                  x="16"
+                  y="10.5"
+                  width="4"
+                  height="2"
+                  rx="0.5"
+                ></rect>
+                <rect
+                  fill="#004976"
+                  x="10"
+                  y="10.5"
+                  width="4"
+                  height="2"
+                  rx="0.5"
+                ></rect>
+                <rect
+                  fill="#004976"
+                  x="4"
+                  y="10.5"
+                  width="4"
+                  height="2"
+                  rx="0.5"
+                ></rect>
+              </g>
+            </svg>
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title v-text="item.title" />
@@ -116,6 +182,7 @@ export default {
   data() {
     return {
       logoPath: require('../assets/small-logo.png'),
+      calendarIcon: require('../assets/calendar.svg'),
       clipped: false,
       drawer: false,
       fixed: false,

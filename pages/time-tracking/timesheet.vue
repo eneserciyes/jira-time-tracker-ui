@@ -1,15 +1,250 @@
+/* eslint-disable */
 <template>
   <v-layout>
-    <v-flex class="text-center">
-      <img src="/v.png" alt="Vuetify.js" class="mb-5" />
-      <blockquote class="blockquote">
-        &#8220;First, ask the problem. Then, write the code.&#8221;
-        <footer>
-          <small>
-            <em>&mdash;John Johnson</em>
-          </small>
-        </footer>
-      </blockquote>
+    <v-flex>
+      <v-sheet height="600">
+        <v-calendar
+          ref="calendar"
+          :type="type"
+          :min-weeks="minWeeks"
+          :max-days="maxDays"
+          :now="now"
+          :dark="dark"
+          :weekdays="weekdays"
+          :first-interval="intervals.first"
+          :interval-minutes="intervals.minutes"
+          :interval-count="intervals.count"
+          :interval-height="intervals.height"
+          :interval-style="intervalStyle"
+          :show-interval-label="showIntervalLabel"
+          :short-intervals="shortIntervals"
+          :short-months="shortMonths"
+          :short-weekdays="shortWeekdays"
+          :color="color"
+          :events="events"
+          :event-overlap-mode="mode"
+          :event-overlap-threshold="45"
+          :event-color="getEventColor"
+          @change="getWorklogs"
+        ></v-calendar>
+      </v-sheet>
+      <!--<img src="/v.png" alt="Vuetify.js" class="mb-5" />
+    <blockquote class="blockquote">
+      &#8220;First, ask the problem. Then, write the code.&#8221;
+      <footer>
+        <small>
+          <em>&mdash;John Johnson</em>
+        </small>
+      </footer>
+    </blockquote> -->
     </v-flex>
   </v-layout>
 </template>
+
+<script>
+import WorklogRetrievalService from '@/service/time-tracker/WorklogRetrievalService'
+
+const weekdaysDefault = [0, 1, 2, 3, 4, 5, 6]
+
+const intervalsDefault = {
+  first: 0,
+  minutes: 60,
+  count: 24,
+  height: 48
+}
+
+const stylings = {
+  default(interval) {
+    return undefined
+  },
+  workday(interval) {
+    const inactive =
+      interval.weekday === 0 ||
+      interval.weekday === 6 ||
+      interval.hour < 9 ||
+      interval.hour >= 17
+    const startOfHour = interval.minute === 0
+    const dark = this.dark
+    const mid = dark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'
+
+    return {
+      backgroundColor: inactive
+        ? dark
+          ? 'rgba(0,0,0,0.4)'
+          : 'rgba(0,0,0,0.05)'
+        : undefined,
+      borderTop: startOfHour ? undefined : '1px dashed ' + mid
+    }
+  },
+  past(interval) {
+    return {
+      backgroundColor: interval.past
+        ? this.dark
+          ? 'rgba(0,0,0,0.4)'
+          : 'rgba(0,0,0,0.05)'
+        : undefined
+    }
+  }
+}
+
+export default {
+  data: () => ({
+    dark: false,
+    startMenu: false,
+    endMenu: false,
+    nowMenu: false,
+    minWeeks: 1,
+    now: null,
+    events: [],
+    colors: [
+      'blue',
+      'indigo',
+      'deep-purple',
+      'cyan',
+      'green',
+      'orange',
+      'grey darken-1'
+    ],
+    names: [
+      'Meeting',
+      'Holiday',
+      'PTO',
+      'Travel',
+      'Event',
+      'Birthday',
+      'Conference',
+      'Party'
+    ],
+    type: 'week',
+    typeOptions: [
+      { text: 'Day', value: 'day' },
+      { text: '4 Day', value: '4day' },
+      { text: 'Week', value: 'week' },
+      { text: 'Month', value: 'month' },
+      { text: 'Custom Daily', value: 'custom-daily' },
+      { text: 'Custom Weekly', value: 'custom-weekly' }
+    ],
+    mode: 'stack',
+    modeOptions: [
+      { text: 'Stack', value: 'stack' },
+      { text: 'Column', value: 'column' }
+    ],
+    weekdays: weekdaysDefault,
+    weekdaysOptions: [
+      { text: 'Sunday - Saturday', value: weekdaysDefault },
+      { text: 'Mon, Wed, Fri', value: [1, 3, 5] },
+      { text: 'Mon - Fri', value: [1, 2, 3, 4, 5] },
+      { text: 'Mon - Sun', value: [1, 2, 3, 4, 5, 6, 0] }
+    ],
+    intervals: intervalsDefault,
+    intervalsOptions: [
+      { text: 'Default', value: intervalsDefault },
+      {
+        text: 'Workday',
+        value: { first: 16, minutes: 30, count: 20, height: 48 }
+      }
+    ],
+    maxDays: 7,
+    maxDaysOptions: [
+      { text: '7 days', value: 7 },
+      { text: '5 days', value: 5 },
+      { text: '4 days', value: 4 },
+      { text: '3 days', value: 3 }
+    ],
+    styleInterval: 'default',
+    styleIntervalOptions: [
+      { text: 'Default', value: 'default' },
+      { text: 'Workday', value: 'workday' },
+      { text: 'Past', value: 'past' }
+    ],
+    color: 'primary',
+    colorOptions: [
+      { text: 'Primary', value: 'primary' },
+      { text: 'Secondary', value: 'secondary' },
+      { text: 'Accent', value: 'accent' },
+      { text: 'Red', value: 'red' },
+      { text: 'Pink', value: 'pink' },
+      { text: 'Purple', value: 'purple' },
+      { text: 'Deep Purple', value: 'deep-purple' },
+      { text: 'Indigo', value: 'indigo' },
+      { text: 'Blue', value: 'blue' },
+      { text: 'Light Blue', value: 'light-blue' },
+      { text: 'Cyan', value: 'cyan' },
+      { text: 'Teal', value: 'teal' },
+      { text: 'Green', value: 'green' },
+      { text: 'Light Green', value: 'light-green' },
+      { text: 'Lime', value: 'lime' },
+      { text: 'Yellow', value: 'yellow' },
+      { text: 'Amber', value: 'amber' },
+      { text: 'Orange', value: 'orange' },
+      { text: 'Deep Orange', value: 'deep-orange' },
+      { text: 'Brown', value: 'brown' },
+      { text: 'Blue Gray', value: 'blue-gray' },
+      { text: 'Gray', value: 'gray' },
+      { text: 'Black', value: 'black' }
+    ],
+    shortIntervals: true,
+    shortMonths: false,
+    shortWeekdays: false
+  }),
+  computed: {
+    intervalStyle() {
+      return stylings[this.styleInterval].bind(this)
+    },
+    hasIntervals() {
+      return this.type in { week: 1, day: 1, '4day': 1, 'custom-daily': 1 }
+    },
+    hasEnd() {
+      return this.type in { 'custom-weekly': 1, 'custom-daily': 1 }
+    }
+  },
+  mounted() {
+    this.$refs.calendar.scrollToTime('08:00')
+  },
+  methods: {
+    viewDay({ date }) {
+      this.start = date
+      this.type = 'day'
+    },
+    getEventColor(event) {
+      return event.color
+    },
+    showIntervalLabel(interval) {
+      return interval.minute === 0
+    },
+    getWorklogs({ start, end }) {
+      function generateEndDate(started, timeSpent) {
+        const endDate = new Date(started)
+        if (timeSpent.charAt(timeSpent.length - 1) === 'h') {
+          endDate.setHours(
+            endDate.getHours() +
+              parseInt(timeSpent.substring(0, timeSpent.length - 1))
+          )
+        }
+        return endDate
+      }
+      const events = []
+      console.log(start.date)
+      console.log(end.date)
+      WorklogRetrievalService.retrieveWorklogs(start.date, end.date).then(
+        (res) => {
+          const JTTWorklogs = res.data
+          console.log(JTTWorklogs)
+          for (const JTTWorklog of JTTWorklogs.worklogs) {
+            console.log('IssueKey: ' + JTTWorklog.issueKey)
+            events.push({
+              name: JTTWorklog.issueKey,
+              start: new Date(JTTWorklog.started),
+              end: generateEndDate(JTTWorklog.started, JTTWorklog.timeSpent),
+              timed: true,
+              color: 'indigo'
+            })
+          }
+        }
+      )
+
+      this.events = events
+    }
+  }
+}
+</script>
