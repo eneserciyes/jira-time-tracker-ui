@@ -17,9 +17,9 @@
               {{ worklog.explanation }}
             </div>
             <div class="vuecal__event-footer">
-              <v-icon> mdi-check-outline </v-icon>
+              <v-icon small> mdi-check-outline </v-icon>
               <div class="issueKey">{{ worklog.issueKey }}</div>
-              <strong> {{ worklog.timeSpent }}</strong>
+              <strong class="timeSpent"> {{ worklog.timeSpent }}</strong>
             </div>
           </div>
           <!-- Or if your events are editable: -->
@@ -105,14 +105,20 @@ export default {
 
 <style>
 .vuecal__event.worklog {
-  height: 75px;
-  padding: -5px -5px;
+  padding: 4px 8px;
   background-color: white;
   border: 1px solid rgb(188, 216, 224);
   box-shadow: rgba(0, 0, 0, 0.08) 0px 1px 3px 0px;
   border-radius: 2px;
   color: black;
   transition: box-shadow 0.3s ease-in-out 0s;
+  width: 95%;
+  margin: 10px auto;
+}
+
+.vuecal__event.worklog:hover {
+  border: 1px solid rgb(0, 73, 118);
+  box-shadow: rgba(18, 72, 90, 0.35) 0px 1px 6px 0px;
 }
 
 .vuecal__event-title {
@@ -122,8 +128,8 @@ export default {
   font-weight: bold;
   font-size: 14px;
   display: flex;
+  text-overflow: ellipsis;
   justify-content: left;
-  margin: 1px 5px;
 }
 
 .vuecal__event-container {
@@ -137,19 +143,23 @@ export default {
   word-break: normal;
   display: flex;
   justify-content: left;
-  margin: 2px 5px;
 }
 
 .vuecal__event-footer {
   display: flex;
   flex-direction: row;
   align-content: center;
+  margin-top: 7px;
+}
+
+.vuecal__event-footer .timeSpent {
+  margin-left: auto;
 }
 
 .issueKey {
   display: flex;
-  justify-content: center;
+  align-items: center;
   font-size: 12px;
-  margin: 0;
+  margin-left: 3px;
 }
 </style>
