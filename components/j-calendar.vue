@@ -1,13 +1,20 @@
 <template>
-  <j-calendar></j-calendar>
+  <div class="container">
+    <div class="row">
+      <div v-for: (date,i) in dates></div>
+    </div>
+  </div>
 </template>
 
 <script>
-import VCalendar from 'vuetify/lib/components/VCalendar/VCalendar'
-
-export default VCalendar.extend({
+export default {
   name: 'JCalendar'
-})
+}
 </script>
 
-<style scoped></style>
+<style scoped>
+.row {
+  display: flex;
+  flex-direction: column;
+}
+</style>

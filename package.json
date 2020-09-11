@@ -28,6 +28,7 @@
     "axios": "^0.19.2",
     "js-cookie": "^2.2.1",
     "nuxt": "^2.0.0",
+    "vue-cal": "^3.6.5",
     "vuex": "^3.3.0"
   },
   "devDependencies": {

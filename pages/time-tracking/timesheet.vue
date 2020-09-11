@@ -44,6 +44,8 @@
             :now="now"
             :dark="dark"
             :weekdays="weekdays"
+            :hide-header="false"
+            :interval-format="ads"
             :first-interval="intervals.first"
             :interval-minutes="intervals.minutes"
             :interval-count="intervals.count"
@@ -58,7 +60,7 @@
             :event-overlap-mode="mode"
             :event-overlap-threshold="45"
             :event-color="getEventColor"
-            @change="getWorklogs"
+            @change="retrieveWorklogsUponDateChange"
           ></v-calendar>
         </v-sheet>
       </v-container>
@@ -85,10 +87,10 @@ import calendar from '@/layouts/calendar'
 const weekdaysDefault = [0, 1, 2, 3, 4, 5, 6]
 
 const intervalsDefault = {
-  first: 0,
+  first: 8,
   minutes: 60,
-  count: 24,
-  height: 48
+  count: 12,
+  height: 120
 }
 
 const stylings = {
@@ -229,6 +231,12 @@ export default {
   mounted() {
     this.$refs.calendar.scrollToTime('08:00')
     this.$refs.calendar.checkChange()
+    // console.log(this.$refs.calendar)
+
+    // console.log('Event: ' + this.document.getElementsByClassName('pl-1'))
+  },
+  created() {
+    debugger
   },
   methods: {
     viewDay({ date }) {
@@ -239,9 +247,9 @@ export default {
       return event.color
     },
     showIntervalLabel(interval) {
-      return interval.minute === 0
+      return false
     },
-    getWorklogs({ start, end }) {
+    retrieveWorklogsUponDateChange({ start, end }) {
       this.start = start.date
       this.end = end.date
 
@@ -268,8 +276,10 @@ export default {
               name: JTTWorklog.issueKey,
               start: new Date(JTTWorklog.started),
               end: generateEndDate(JTTWorklog.started, JTTWorklog.timeSpent),
+              color: 'primary',
               timed: true,
-              color: 'indigo'
+              singleline: false,
+              eventSummary: () => 'Hi, this is an event'
             })
           }
         }
