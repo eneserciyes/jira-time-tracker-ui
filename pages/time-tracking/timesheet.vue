@@ -39,20 +39,13 @@ export default {
 </script>
 
 <style>
-html,
-body {
-  height: 100%;
-  margin: 0;
-  overflow: hidden;
-  font-family: 'Open Sans', sans-serif;
-}
-
 @media all {
-  .container {
+  .calendar_header.container {
     max-width: 98%;
     padding: 12px 0px;
   }
 }
+
 .wrapper-navbar {
   display: flex;
   flex-direction: column;

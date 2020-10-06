@@ -78,7 +78,7 @@
       </v-menu>
     </v-app-bar>
     <v-content>
-      <v-container>
+      <v-container class="layoutContainer">
         <nuxt />
       </v-container>
     </v-content>
@@ -137,4 +137,11 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+}
+</style>

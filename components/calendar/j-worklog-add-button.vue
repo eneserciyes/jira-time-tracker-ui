@@ -23,49 +23,61 @@
         <v-card-title>
           <span class="headline">Log Time</span>
         </v-card-title>
+        <!--TODO: Issue selected validation-->
         <v-card-text>
-          <v-row dense>
-            <v-col cols="12">
-              <j-issue-autocomplete @issueSelected="setSelectedIssue" />
-            </v-col>
-            <v-col cols="12">
-              <v-textarea
-                v-model="comment"
-                label="Description"
-                outlined
-                no-resize
-              ></v-textarea>
-            </v-col>
-            <v-col cols="12" md="6">
-              <v-text-field
-                v-model="worked"
-                validate-on-blur
-                :rules="[rules.required, rules.correctFormat]"
-                prepend-icon="mdi-briefcase"
-                outlined
-                label="Worked*"
-                required
-              ></v-text-field>
-            </v-col>
-            <v-spacer />
-            <v-col cols="12" md="6">
-              <v-text-field
-                v-model="remainingEstimate"
-                prepend-icon="mdi-av-timer"
-                outlined
-                label="Remaining Estimate"
-                required
-              ></v-text-field>
+          <v-form v-model="isFormValid">
+            <v-row dense>
+              <v-col cols="12">
+                <j-issue-autocomplete
+                  ref="issueAutocomplete"
+                  @issueSelected="setSelectedIssue"
+                />
+              </v-col>
+              <v-col cols="12">
+                <v-textarea
+                  v-model="comment"
+                  label="Description"
+                  outlined
+                  no-resize
+                ></v-textarea>
+              </v-col>
+              <v-col cols="12" md="6">
+                <v-text-field
+                  v-model="worked"
+                  validate-on-blur
+                  :rules="[rules.required, rules.correctFormat]"
+                  prepend-icon="mdi-briefcase"
+                  outlined
+                  label="Worked*"
+                  required
+                ></v-text-field>
+              </v-col>
               <v-spacer />
-            </v-col>
-          </v-row>
+              <v-col cols="12" md="6">
+                <v-text-field
+                  v-model="remainingEstimate"
+                  prepend-icon="mdi-av-timer"
+                  outlined
+                  label="Remaining Estimate"
+                  required
+                ></v-text-field>
+                <v-spacer />
+              </v-col>
+            </v-row>
+          </v-form>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="blue darken-1" text @click="clearDialogAndClose"
             >Close</v-btn
           >
-          <v-btn color="blue darken-1" text @click="addWorklog">Save</v-btn>
+          <v-btn
+            color="blue darken-1"
+            text
+            :disabled="!isFormValid"
+            @click="addWorklog"
+            >Save</v-btn
+          >
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -95,6 +107,7 @@ export default {
     comment: '',
     worked: '',
     remainingEstimate: '',
+    isFormValid: false,
     rules: {
       required: (value) => !!value || 'Required.',
       correctFormat: (value) => {
@@ -115,9 +128,10 @@ export default {
         worklogExplanation: this.comment,
         started: new Date(this.date),
         timeSpentSeconds: this.worked * 3600
+      }).then((res) => {
+        debugger
+        if (res.data) this.$emit('addedWorklog')
       })
-      debugger
-      this.$emit('addedWorklog')
       this.clearDialogAndClose()
     },
     appendHourChar() {
@@ -135,6 +149,7 @@ export default {
       this.worked = ''
       this.remainingEstimate = ''
 
+      this.$refs.issueAutocomplete.clear()
       this.dialog = false
     }
   }

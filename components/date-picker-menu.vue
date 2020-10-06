@@ -10,8 +10,8 @@
     @update="updateValues"
   >
     <template v-slot:input="picker">
-      {{ picker.startDate.toDateString() | date }} -
-      {{ picker.endDate.toDateString() | date }}
+      {{ picker.startDate.toDateString() }} -
+      {{ picker.endDate.toDateString() }}
     </template>
   </date-range-picker>
 </template>
@@ -26,8 +26,8 @@ export default {
   data() {
     return {
       opens: 'left',
-      showDropdowns: 'true',
-      autoApply: 'false',
+      showDropdowns: true,
+      autoApply: true,
       dateRange: {
         startDate: new Date(),
         endDate: new Date()
