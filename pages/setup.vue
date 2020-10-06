@@ -31,11 +31,10 @@
         </v-card-title>
         <v-card-text>
           <p>
-            Jira Time Tracking is an application that allows to track logged
-            works on the Jira issues in a proper calendar format. Please fill in
-            the details of the Jira instance you wish to retrieve user, group
-            and work-log information. The user needs to be have administrator
-            permissions.
+            Scrumier is an application that allows to track logged works on the
+            Jira issues in a proper calendar format. Please fill in the details
+            of the Jira instance you wish to retrieve user, group and work-log
+            information. The user needs to be have administrator permissions.
             <a href="https://vuetifyjs.com" target="_blank">
               Learn more about configuring Jira integration.
             </a>
@@ -99,11 +98,10 @@
         </v-card-title>
         <v-card-text>
           <p>
-            Jira Time Tracking is an application that allows to schedule
-            notification as a reminder. Please make sure that the given Mail
-            Server SMTP details are valid. You may skip the mail server
-            integration for now. Administrator users can be configure the SMTP
-            Mail Server later on.
+            Scrumier is an application that allows to schedule notification as a
+            reminder. Please make sure that the given Mail Server SMTP details
+            are valid. You may skip the mail server integration for now.
+            Administrator users can be configure the SMTP Mail Server later on.
             <a href="https://vuetifyjs.com" target="_blank">
               Learn more about integration SMTP Mail Server.
             </a>
@@ -175,11 +173,10 @@
         </v-card-title>
         <v-card-text>
           <p>
-            Jira Time Tracking is an application requires an administrator
-            account. After the setup is successfully completed, administrator
-            user will be able to update Jira Server and Mail Server
-            configuration. Administrator user can also assign users to groups
-            including administrator group.
+            Scrumier is an application requires an administrator account. After
+            the setup is successfully completed, administrator user will be able
+            to update Jira Server and Mail Server configuration. Administrator
+            user can also assign users to groups including administrator group.
             <a href="https://vuetifyjs.com" target="_blank">
               Learn more about Administrator User.
             </a>
@@ -251,6 +248,7 @@ import JAlert from '~/components/j-alert'
 import ConfigurationService from '~/service/Configuration/ConfigurationService'
 import UserService from '~/service/authentication/UserService'
 import IntegrationService from '@/service/integration/IntegrationService'
+
 export default {
   name: 'SetupVue',
   components: { JAlert, JButton, JTextField },

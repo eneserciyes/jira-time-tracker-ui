@@ -6,9 +6,11 @@
 
         <v-list-item v-for="issue in issues" :key="issue.key">
           <v-list-item-avatar>
-            <v-icon class="grey lighten-1" dark>
-              mdi-folder
-            </v-icon>
+            <img
+              v-if="issue.assignee"
+              :src="issue.assignee.avatarUrls['48x48']"
+              alt="assignee"
+            />
           </v-list-item-avatar>
 
           <v-list-item-content>
