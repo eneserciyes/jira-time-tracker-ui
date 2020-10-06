@@ -5,7 +5,6 @@
     :single-expand="singleExpand"
     :expanded.sync="expanded"
     item-key="name"
-    class="elevation-1"
     show-expand
     @item-expanded="processRawData"
   >
@@ -61,7 +60,6 @@ export default {
   },
   watch: {
     data() {
-      debugger
       this.dataset = { labels: [], datasets: [] }
       this.refreshItems()
       this.addDatasetLabels()

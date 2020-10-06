@@ -1,11 +1,11 @@
 <template>
   <v-container>
-    <v-row align="center" justify="center">
+    <v-row no-gutters align="center" justify="center">
       <v-col cols="2">
-        <h3 style="text-align: center">Team Reports</h3>
+        <h3 style="text-align: left">Team Reports</h3>
       </v-col>
       <v-spacer />
-      <v-col cols="3">
+      <v-col style="margin-right: 10px" cols="3">
         <v-row class="fill-height" no-gutters justify="center" align="center">
           <j-board-search-autocomplete @boardSelected="updateBoardId" />
         </v-row>
@@ -28,13 +28,15 @@
       </v-tab>
     </v-tabs>
     <v-tabs-items v-model="tab">
-      <v-tab-item v-for="item in items" :key="item">
+      <v-tab-item>
         <j-time-spent-on-issues-tab
           v-if="issues"
           :issues="issues"
           :doughnut-data="doughnutData"
         />
       </v-tab-item>
+      <v-tab-item> </v-tab-item>
+      <v-tab-item> </v-tab-item>
     </v-tabs-items>
   </v-container>
 </template>
@@ -79,16 +81,4 @@ export default {
 }
 </script>
 
-<style>
-html,
-body {
-  height: 100%;
-  margin: 0;
-  overflow: hidden;
-  font-family: 'Open Sans', sans-serif;
-}
-
-.reportButton {
-  margin: auto 10px;
-}
-</style>
+<style></style>

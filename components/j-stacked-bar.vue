@@ -66,7 +66,7 @@ export default {
       type: Object,
       default() {
         return {
-          responsive: true,
+          responsive: false,
           maintainAspectRatio: false,
           scales: {
             xAxes: [

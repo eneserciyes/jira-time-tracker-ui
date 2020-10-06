@@ -11,6 +11,7 @@
     clearable
     label="Sprints"
     :placeholder="placeholder"
+    :disabled="boardId === -1"
     @change="$emit('sprintSelected', { selectedItem: model })"
   ></v-autocomplete>
 </template>
@@ -23,7 +24,7 @@ export default {
   props: {
     boardId: {
       type: Number,
-      default: 0
+      default: -1
     },
     placeholder: {
       type: String,

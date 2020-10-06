@@ -12,7 +12,21 @@
     item-value="key"
     placeholder="Start typing to search"
     @change="$emit('issueSelected', { selectedItem: model })"
-  ></v-autocomplete>
+  >
+    <template v-slot:item="data">
+      <template v-if="typeof data.item !== 'object'">
+        <v-list-item-content v-text="data.item"></v-list-item-content>
+      </template>
+      <template v-else>
+        <v-list-item-content>
+          <v-list-item-title v-text="data.item.key"></v-list-item-title>
+          <v-list-item-subtitle
+            v-text="data.item.fields.summary"
+          ></v-list-item-subtitle>
+        </v-list-item-content>
+      </template>
+    </template>
+  </v-autocomplete>
 </template>
 
 <script>
@@ -50,6 +64,11 @@ export default {
         console.log(err)
       })
       .finally(() => (this.isLoading = false))
+  },
+  methods: {
+    clear() {
+      this.model = null
+    }
   }
 }
 </script>
