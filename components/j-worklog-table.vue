@@ -61,6 +61,7 @@ export default {
   },
   watch: {
     data() {
+      debugger
       this.dataset = { labels: [], datasets: [] }
       this.refreshItems()
       this.addDatasetLabels()
