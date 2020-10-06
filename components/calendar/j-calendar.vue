@@ -69,7 +69,7 @@
 import VueCal from 'vue-cal'
 import 'vue-cal/dist/vuecal.css'
 import 'vue-cal/dist/drag-and-drop.js'
-import JWorklogAddButton from '@/components/j-worklog-add-button'
+import JWorklogAddButton from '@/components/calendar/j-worklog-add-button'
 import WorklogRetrievalService from '@/service/time-tracker/WorklogRetrievalService'
 
 export default {

@@ -71,9 +71,7 @@ export default {
           scales: {
             xAxes: [
               {
-                stacked: true,
-                categoryPercentage: 0.5,
-                barPercentage: 1
+                stacked: true
               }
             ],
             yAxes: [

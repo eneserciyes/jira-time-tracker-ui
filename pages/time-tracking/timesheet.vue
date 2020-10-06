@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import JCalendar from '@/components/j-calendar'
+import JCalendar from '@/components/calendar/j-calendar'
 
 export default {
   name: 'AdminView',

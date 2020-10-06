@@ -26,13 +26,7 @@
         <v-card-text>
           <v-row dense>
             <v-col cols="12">
-              <v-select
-                v-model="selectedIssueKey"
-                :items="['JIR-1', 'JIR-2', 'JIR-3', 'JIR-4']"
-                label="Select issue.."
-                outlined
-                required
-              ></v-select>
+              <j-issue-autocomplete @issueSelected="setSelectedIssue" />
             </v-col>
             <v-col cols="12">
               <v-textarea
@@ -80,9 +74,11 @@
 
 <script>
 import WorklogCreationService from '@/service/time-tracker/WorklogCreationService'
+import JIssueAutocomplete from '@/components/autocomplete/j-issue-autocomplete'
 
 export default {
   name: 'JWorklogAddButton',
+  components: { JIssueAutocomplete },
   props: {
     date: {
       type: String,
@@ -113,7 +109,7 @@ export default {
     }
   }),
   methods: {
-    addWorklog() {
+    addWorklog({ selectedItem }) {
       WorklogCreationService.addWorklog({
         issueKey: this.selectedIssueKey,
         worklogExplanation: this.comment,
@@ -129,6 +125,9 @@ export default {
       if (this.worked[this.worked.length - 1] !== 'h') {
         this.worked = this.worked + 'h'
       }
+    },
+    setSelectedIssue({ selectedItem }) {
+      this.selectedIssueKey = selectedItem
     },
     clearDialogAndClose() {
       this.comment = ''
