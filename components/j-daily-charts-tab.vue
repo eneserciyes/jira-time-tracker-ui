@@ -2,7 +2,7 @@
   <v-row class="fill-height">
     <v-col cols="3">
       <v-list subheader two-line>
-        <v-subheader inset>Issues In This Sprint</v-subheader>
+        <v-subheader inset>Team</v-subheader>
 
         <v-list-item v-for="issue in issues" :key="issue.key">
           <v-list-item-avatar>
@@ -34,21 +34,8 @@
 </template>
 
 <script>
-import JDoughnutChart from '@/components/charts/j-doughnut-chart'
-
 export default {
-  name: 'JTimeSpentOnIssuesTab',
-  components: { JDoughnutChart },
-  props: {
-    issues: {
-      type: Object,
-      default: () => {}
-    },
-    doughnutData: {
-      type: Object,
-      default: () => {}
-    }
-  }
+  name: 'JDailyChartsTab'
 }
 </script>
 

@@ -30,6 +30,9 @@
           :end-date="endDate"
         ></j-worklog-table>
       </v-tab-item>
+      <v-tab-item>
+        <j-daily-charts-tab />
+      </v-tab-item>
       <v-tab-item> </v-tab-item>
     </v-tabs-items>
   </v-container>
@@ -39,14 +42,15 @@
 import DatePickerMenu from '@/components/date-picker-menu'
 import WorklogRetrievalService from '@/service/time-tracker/WorklogRetrievalService'
 import JWorklogTable from '@/components/j-worklog-table'
+import JDailyChartsTab from '@/components/j-daily-charts-tab'
 
 export default {
   name: 'ReportsVue',
-  components: { JWorklogTable, DatePickerMenu },
+  components: { JDailyChartsTab, JWorklogTable, DatePickerMenu },
   data() {
     return {
       tab: null,
-      items: ['Required Worklog Table', 'Export Report'],
+      items: ['Required Worklog Table', 'Daily Chart', 'Export Report'],
       allWorklogs: null,
       weekDayCount: 0,
       startDate: '',
@@ -66,15 +70,6 @@ export default {
           return r
         }, {})
       })
-    },
-    setDateToDay() {
-      let day
-      if (this.startDate === '') {
-        day = new Date().toISOString().substring(0, 10)
-      } else {
-        day = this.startDate
-      }
-      this.refreshWorklogData({ startDate: day, endDate: day })
     }
   }
 }

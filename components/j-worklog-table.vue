@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import JStackedBar from '@/components/j-stacked-bar'
+import JStackedBar from '@/components/charts/j-stacked-bar'
 
 export default {
   name: 'JWorklogTable',
