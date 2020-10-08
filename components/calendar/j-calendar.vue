@@ -92,7 +92,9 @@ export default {
         // console.log(JTTWorklogs)
         for (const JTTWorklog of JTTWorklogs.worklogs) {
           // console.log('IssueKey: ' + JTTWorklog.issueKey)
+          console.log('ID: ' + JTTWorklog.id)
           worklogs.push({
+            id: JTTWorklog.id,
             title: JTTWorklog.issueSummary,
             start: this.parseSimpleDate(new Date(JTTWorklog.started)),
             end: this.parseSimpleDate(new Date(JTTWorklog.started)),
