@@ -7,24 +7,11 @@
       active-view="week"
       :hide-weekends="hideWeekends"
       :events="events"
-      :snap-to-time="0"
-      editable-events
       @ready="retrieveWorklogsUponDateChange"
       @view-change="retrieveWorklogsUponDateChange"
     >
       <template v-slot:event="{ event: worklog }">
-        <div class="vuecal__event-container">
-          <div class="vuecal__event-title">{{ worklog.title }}</div>
-          <div class="vuecal__event-explanation">
-            {{ worklog.explanation }}
-          </div>
-          <div class="vuecal__event-footer">
-            <v-icon small> mdi-check-outline </v-icon>
-            <div class="issueKey">{{ worklog.issueKey }}</div>
-            <strong class="timeSpent"> {{ worklog.timeSpent }}</strong>
-          </div>
-        </div>
-        <!-- Or if your events are editable: -->
+        <j-event :worklog="worklog"></j-event>
       </template>
       <template v-slot:title="{ title, view }">
         <span v-if="view.id === 'week'">
@@ -71,10 +58,11 @@ import 'vue-cal/dist/vuecal.css'
 import 'vue-cal/dist/drag-and-drop.js'
 import JWorklogAddButton from '@/components/calendar/j-worklog-add-button'
 import WorklogRetrievalService from '@/service/time-tracker/WorklogRetrievalService'
+import JEvent from '@/components/calendar/j-event'
 
 export default {
   name: 'JCalendar',
-  components: { JWorklogAddButton, VueCal },
+  components: { JEvent, JWorklogAddButton, VueCal },
   data() {
     return {
       hideWeekends: true,
