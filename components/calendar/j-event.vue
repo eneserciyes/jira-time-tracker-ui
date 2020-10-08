@@ -77,7 +77,7 @@
 </template>
 
 <script>
-import WorklogCreationService from '@/service/time-tracker/WorklogCreationService'
+import UpdateWorklogService from '@/service/time-tracker/UpdateWorklogService'
 
 export default {
   name: 'JEvent',
@@ -110,15 +110,16 @@ export default {
     }
   },
   methods: {
-    addWorklog() {
-      WorklogCreationService.addWorklog({
-        issueKey: this.selectedIssueKey,
+    updateWorklog() {
+      UpdateWorklogService.updateWorklog({
+        id: this.worklog.id,
+        issueKey: this.worklog.issueKey,
         worklogExplanation: this.comment,
         started: new Date(this.date),
         timeSpentSeconds: this.worked * 3600
       }).then((res) => {
         debugger
-        if (res.data) this.$emit('addedWorklog')
+        if (res.data) this.$emit('updatedWorklog')
       })
       this.clearDialogAndClose()
     },
