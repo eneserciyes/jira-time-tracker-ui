@@ -2,18 +2,8 @@
   <v-data-table
     :headers="headers"
     :items="items"
-    :single-expand="singleExpand"
-    :expanded.sync="expanded"
     item-key="name"
-    show-expand
-    @item-expanded="processRawData"
-  >
-    <template v-slot:expanded-item="{ headers, item }">
-      <td style="margin-top: 20px" :colspan="headers.length">
-        <j-stacked-bar :author-key="item.authorKey" :chart-data="dataset" />
-      </td>
-    </template>
-  </v-data-table>
+  ></v-data-table>
 </template>
 
 <script>
@@ -21,6 +11,7 @@ import JStackedBar from '@/components/j-stacked-bar'
 
 export default {
   name: 'JWorklogTable',
+  // eslint-disable-next-line vue/no-unused-components
   components: { JStackedBar },
   props: {
     data: {
