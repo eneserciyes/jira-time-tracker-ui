@@ -11,7 +11,12 @@
       @view-change="retrieveWorklogsUponDateChange"
     >
       <template v-slot:event="{ event: worklog }">
-        <j-event :worklog="worklog"></j-event>
+        <j-event
+          :worklog="worklog"
+          @updatedWorklog="
+            retrieveWorklogsUponDateChange({ startDate, endDate })
+          "
+        ></j-event>
       </template>
       <template v-slot:title="{ title, view }">
         <span v-if="view.id === 'week'">
