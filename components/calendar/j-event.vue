@@ -22,7 +22,6 @@
       <v-card-title>
         <span class="headline">Log Time</span>
       </v-card-title>
-      <!--TODO: Issue selected validation-->
       <v-card-text>
         <v-form v-model="isFormValid">
           <v-row dense>
