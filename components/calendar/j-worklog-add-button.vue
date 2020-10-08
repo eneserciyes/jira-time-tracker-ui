@@ -122,7 +122,7 @@ export default {
     }
   }),
   methods: {
-    addWorklog({ selectedItem }) {
+    addWorklog() {
       WorklogCreationService.addWorklog({
         issueKey: this.selectedIssueKey,
         worklogExplanation: this.comment,
@@ -133,12 +133,6 @@ export default {
         if (res.data) this.$emit('addedWorklog')
       })
       this.clearDialogAndClose()
-    },
-    appendHourChar() {
-      console.log(this.worked)
-      if (this.worked[this.worked.length - 1] !== 'h') {
-        this.worked = this.worked + 'h'
-      }
     },
     setSelectedIssue({ selectedItem }) {
       this.selectedIssueKey = selectedItem
