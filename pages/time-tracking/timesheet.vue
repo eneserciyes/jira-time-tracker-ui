@@ -40,7 +40,7 @@ export default {
 
 <style>
 @media all {
-  .calendar_header.container {
+  .container {
     max-width: 98%;
     padding: 12px 0px;
   }

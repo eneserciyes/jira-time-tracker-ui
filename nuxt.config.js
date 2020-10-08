@@ -96,7 +96,7 @@ export default {
         dark: {
           primary: '#26547c',
           accent: '#501537',
-          secondary: '#f3f8f2',
+          secondary: '#501537',
           kronosBlack: '#130303',
           tertiary: '#91818A',
           info: colors.teal.lighten1,
@@ -107,7 +107,7 @@ export default {
         light: {
           primary: '#26547c',
           accent: '#501537',
-          secondary: '#f3f8f2',
+          secondary: '#501537',
           kronosBlack: '#130303',
           tertiary: '#91818A',
           info: colors.teal.lighten1,
