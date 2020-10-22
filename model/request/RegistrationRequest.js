@@ -1,5 +1,5 @@
 export const RegistrationRequest = {
-  username: String,
-  password: String,
-  team: String
+    username: String,
+    password: String,
+    team: String
 }

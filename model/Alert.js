@@ -1,5 +1,5 @@
 export const Alert = {
-  type: String,
-  message: String,
-  show: Boolean
+    type: String,
+    message: String,
+    show: Boolean
 }

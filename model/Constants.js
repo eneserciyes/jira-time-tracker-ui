@@ -1,5 +1,5 @@
 const ADMIN = {
-  permission: 'ADMIN'
+    permission: 'ADMIN'
 }
 
 export default ADMIN

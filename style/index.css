@@ -1,15 +1,16 @@
 
 #application_description {
-  background: linear-gradient(#0151cc,#589ef9);
+    background: linear-gradient(#0151cc, #589ef9);
 }
 
-.v-application{
-  font-family: 'Open Sans', sans-serif;
+.v-application {
+    font-family: 'Open Sans', sans-serif;
 }
+
 .v-application a {
-  color: white;
+    color: white;
 }
 
 .v-application p {
-  color: #f7f8fb;
+    color: #f7f8fb;
 }
