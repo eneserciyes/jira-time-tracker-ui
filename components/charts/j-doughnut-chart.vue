@@ -33,6 +33,7 @@ export default {
               '#3e95cd',
               '#8e5ea2',
               '#3cba9f',
+              '#0f0f0f',
               '#e8c3b9',
               '#c45850'
             ],
@@ -40,6 +41,11 @@ export default {
           }
         ]
       }
+    }
+  },
+  watch: {
+    data() {
+      this.renderChart(this.chartData, this.options)
     }
   },
   mounted() {
