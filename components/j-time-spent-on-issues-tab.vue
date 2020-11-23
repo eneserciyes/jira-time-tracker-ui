@@ -11,6 +11,7 @@
               :src="issue.assignee.avatarUrls['48x48']"
               alt="assignee"
             />
+            <img v-else src="../assets/user.png" alt="unassigned" />
           </v-list-item-avatar>
 
           <v-list-item-content>
