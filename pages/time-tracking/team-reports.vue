@@ -35,8 +35,6 @@
           :doughnut-data="doughnutData"
         />
       </v-tab-item>
-      <v-tab-item> </v-tab-item>
-      <v-tab-item> </v-tab-item>
     </v-tabs-items>
   </v-container>
 </template>
@@ -57,7 +55,7 @@ export default {
   data() {
     return {
       tab: null,
-      items: ['Time Spent On Issues', 'Team Velocity', 'Export Report'],
+      items: ['Time Spent On Issues'],
       issues: null,
       doughnutData: null,
       sprintPlaceholder: 'Select board to view sprints',

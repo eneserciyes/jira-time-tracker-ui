@@ -33,7 +33,6 @@
       <v-tab-item>
         <j-daily-charts-tab />
       </v-tab-item>
-      <v-tab-item> </v-tab-item>
     </v-tabs-items>
   </v-container>
 </template>
@@ -50,7 +49,7 @@ export default {
   data() {
     return {
       tab: null,
-      items: ['Required Worklog Table', 'Daily Chart', 'Export Report'],
+      items: ['Required Worklog Table', 'Daily Chart'],
       allWorklogs: null,
       weekDayCount: 0,
       startDate: '',
