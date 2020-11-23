@@ -3,5 +3,9 @@ import Api from '@/service/Api'
 export default {
   testConnection(body) {
     return Api().post('/integration/jira/connect', body)
+  },
+
+  testMailConnection(body) {
+    return Api().post('/integration/jira/connectMail',body)
   }
 }

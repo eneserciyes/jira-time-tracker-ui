@@ -137,6 +137,16 @@
             required
             type="password"
           ></j-text-field>
+          <v-switch
+            v-model="mailAuth"
+            label="Authentication required"
+          ></v-switch>
+          <j-text-field
+            id="mailEncType"
+            v-model="mailEnctype"
+            label="Encryption Type"
+            hint="SSL or TLS"
+          ></j-text-field>
         </v-card-text>
         <v-card-actions>
           <v-spacer />
@@ -275,6 +285,8 @@ export default {
       port: '',
       mailUsername: '',
       mailPassword: '',
+      mailAuth: '',
+      mailEnctype: '',
       // admin details
       adminUsername: '',
       adminEmail: '',
@@ -368,8 +380,28 @@ export default {
         })
     },
     testMailConnection() {
-      // TODO
-      alert('test mail')
+      const this_ = this
+      IntegrationService.testMailConnection({
+        host: this_.host,
+        port: this_.port,
+        username: this_.mailUsername,
+        password: this_.mailPassword,
+        enctype: this_.enctype,
+        auth: this_.auth
+      })
+        .then((response) => {
+          if (response.status === 200) {
+            this_.alert.show = true
+            this_.alert.message = 'Connection is successfully verified.'
+            this_.alert.type = 'success'
+            this_.connectionTestSuccessful = true
+          }
+        })
+        .catch((e) => {
+          this_.alert.show = true
+          this_.alert.type = 'error'
+          this_.alert.message = 'Connection failed.'
+        })
     },
     doNext() {
       this.connectionTestSuccessful = false
@@ -407,7 +439,9 @@ export default {
           { propertyKey: 'SMTP_HOST', propertyValue: this_.host },
           { propertyKey: 'SMTP_PORT', propertyValue: this_.port },
           { propertyKey: 'SMTP_USERNAME', propertyValue: this_.mailUsername },
-          { propertyKey: 'SMTP_PASSWORD', propertyValue: this_.mailPassword }
+          { propertyKey: 'SMTP_PASSWORD', propertyValue: this_.mailPassword },
+          { propertyKey: 'SMTP_AUTH', propertyValue: this_.mailAuth },
+          { propertyKey: 'SMTP_ENCTYPE', propertyValue: this_.mailEnctype }
         )
       }
       configProperties.push(
@@ -444,7 +478,7 @@ export default {
   },
   head() {
     return {
-      title: 'Setup Jira Time Tracker'
+      title: 'Setup Scrumier'
     }
   },
   layout: 'unauthorized',
