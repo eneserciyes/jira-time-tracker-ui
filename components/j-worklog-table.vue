@@ -15,8 +15,8 @@ export default {
   components: { JStackedBar },
   props: {
     data: {
-      type: Promise,
-      default: () => {}
+      type: Array,
+      default: () => []
     },
     startDate: {
       type: String,
@@ -34,26 +34,17 @@ export default {
           text: 'User',
           align: 'start',
           sortable: false,
-          value: 'name'
+          value: 'username'
         },
-        { text: 'R%', value: 'requiredPercent' },
-        { text: 'Logged', value: 'logged' }
-      ],
-      singleExpand: true,
-      expanded: [],
-      items: [],
-      dataset: {
-        labels: [],
-        datasets: []
-      },
-      colors: ['#26547C', '#F06543', '#D9D375', '#53917E', '#C96480', '#CEFF1A']
+        { text: 'R%', value: 'logPercentage' },
+        { text: 'Logged', value: 'loggedHours' }
+      ]
     }
   },
-  watch: {
-    data() {
-      this.dataset = { labels: [], datasets: [] }
-      this.refreshItems()
-      this.addDatasetLabels()
+  computed: {
+    items() {
+      if (this.data === null) return []
+      else return this.data
     }
   },
   methods: {

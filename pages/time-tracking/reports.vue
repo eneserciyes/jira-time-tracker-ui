@@ -25,7 +25,7 @@
       <v-tab-item>
         <j-worklog-table
           style="margin-top: 20px"
-          :data="allWorklogs"
+          :data="individualReportsData"
           :start-date="startDate"
           :end-date="endDate"
         ></j-worklog-table>
@@ -39,9 +39,9 @@
 
 <script>
 import DatePickerMenu from '@/components/date-picker-menu'
-import WorklogRetrievalService from '@/service/time-tracker/WorklogRetrievalService'
 import JWorklogTable from '@/components/j-worklog-table'
 import JDailyChartsTab from '@/components/j-daily-charts-tab'
+import IndividualReportService from '@/service/time-tracker/IndividualReportService'
 
 export default {
   name: 'ReportsVue',
@@ -50,7 +50,7 @@ export default {
     return {
       tab: null,
       items: ['Required Worklog Table', 'Daily Chart'],
-      allWorklogs: null,
+      individualReportsData: null,
       weekDayCount: 0,
       startDate: '',
       endDate: ''
@@ -60,14 +60,11 @@ export default {
     refreshWorklogData({ startDate, endDate }) {
       this.startDate = startDate
       this.endDate = endDate
-      this.allWorklogs = WorklogRetrievalService.retrieveAllWorklogs(
+      IndividualReportService.retrieveIndividualReportsData(
         startDate,
         endDate
       ).then((res) => {
-        return res.data.worklogs.reduce((r, a) => {
-          r[a.author.key] = [...(r[a.author.key] || []), a]
-          return r
-        }, {})
+        this.individualReportsData = res.data.data
       })
     }
   }
