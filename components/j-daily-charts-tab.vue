@@ -28,14 +28,22 @@
       </v-list>
     </v-col>
     <v-col cols="9">
-      <j-doughnut-chart :data="doughnutData"></j-doughnut-chart>
+      <j-stacked-bar :chartdata="dailyChartData"></j-stacked-bar>
     </v-col>
   </v-row>
 </template>
 
 <script>
+import JStackedBar from '@/components/charts/j-stacked-bar'
 export default {
-  name: 'JDailyChartsTab'
+  name: 'JDailyChartsTab',
+  components: { JStackedBar },
+  props: {
+    dailyChartData: {
+      type: Object,
+      default: () => {}
+    }
+  }
 }
 </script>
 

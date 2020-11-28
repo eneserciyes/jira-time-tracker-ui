@@ -58,10 +58,6 @@ export default {
   extends: Bar,
   mixins: [reactiveProp],
   props: {
-    authorKey: {
-      type: String,
-      default: ''
-    },
     options: {
       type: Object,
       default() {

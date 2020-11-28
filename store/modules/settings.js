@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import Cookie from 'js-cookie'
 import ObjectUtils from '~/service/Utils/ObjectUtils'
 import {ApplicationUser} from '~/model/ApplicationUser'
