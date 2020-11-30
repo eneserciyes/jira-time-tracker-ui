@@ -429,7 +429,8 @@ export default {
         username: this.adminUsername,
         password: this.adminPassword,
         email: this.adminEmail,
-        team: 'jira-time-tracker-admins'
+        team: 'jira-time-tracker-admins',
+        isAdmin: true
       })
     },
     configureProperties() {

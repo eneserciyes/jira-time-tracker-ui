@@ -109,7 +109,6 @@ export default {
       this.loggedInUser.token = response.data.token
       this.loggedInUser.isLoggedIn = true
       this.loggedInUser.permissions = UserUtils.parsePermissions(response)
-      this.loggedInUser.isAdmin = UserUtils.isAdmin(this.loggedInUser)
 
       this.$store.dispatch('login', this.loggedInUser)
     },
