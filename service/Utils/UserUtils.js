@@ -1,6 +1,6 @@
 export default {
   isAdmin(user) {
-    return user.isAdmin()
+    return user.permissions.includes('ADMIN')
   },
   parsePermissions(response) {
     const permissions = []
