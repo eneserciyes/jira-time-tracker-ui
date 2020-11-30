@@ -103,6 +103,7 @@ export default {
       this.$nuxt.$loading.finish()
     },
     storeLoggedInUser(response) {
+      debugger
       this.loggedInUser = response.data.details
       this.loggedInUser.token = response.data.token
       this.loggedInUser.isLoggedIn = true
@@ -120,7 +121,7 @@ export default {
   },
   head() {
     return {
-      title: 'Login | Jira Time Tracker'
+      title: 'Login | Scrumier'
     }
   }
 }

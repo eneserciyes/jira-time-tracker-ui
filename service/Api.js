@@ -4,6 +4,7 @@ import Cookie from 'js-cookie'
 export default () => {
   const cookieToken = Cookie.get('X-Auth-Token')
   const authToken = cookieToken ? 'Bearer ' + cookieToken : ''
+  const authUsername = JSON.parse(Cookie.get('X-Auth-User')).username
 
   return axios.create({
     baseURL: process.env.baseURL,
@@ -12,7 +13,8 @@ export default () => {
       Accept: 'application/json',
       'Content-Type': 'application/json',
       'X-Request-Source': 'Scrumier-UI',
-      'X-Auth-Token': authToken
+      'X-Auth-Token': authToken,
+      'X-Auth-User': authUsername
     }
   })
 }

@@ -7,5 +7,9 @@ export default {
 
   testMailConnection(body) {
     return Api().post('/integration/jira/connectMail',body)
+  },
+
+  searchJiraUsers(searchQuery){
+    return Api().get('/integration/jira/user/search', {params: {searchQuery}})
   }
 }

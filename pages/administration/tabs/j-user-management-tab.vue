@@ -28,21 +28,23 @@
                           Search by username
                         </v-card-title>
                         <v-text-field
+                          v-model="searchQuery"
                           style="width: 300px; margin: 20px"
                           label="Username"
                           outlined
                           placeholder="Type to search users.."
                         ></v-text-field>
+                        <v-btn @click="searchUsers(searchQuery)">Search</v-btn>
                         <h3 style="margin:20px">User List</h3>
-                        <v-list v-if="searchedUsers">
+                        <v-list two-line v-if="searchedUsers">
                           <v-list-item
                             v-for="user in searchedUsers"
                             :key="user.resourceId"
                           >
                             <v-list-item-avatar>
                               <img
-                                v-if="user.avatarUrl"
-                                :src="user.avatarUrl"
+                                v-if="user.avatarUrls"
+                                :src="user.avatarUrls['48x48']"
                                 alt="avatar"
                               />
                             </v-list-item-avatar>
@@ -51,19 +53,29 @@
                               <v-list-item-title
                                 v-text="user.displayName"
                               ></v-list-item-title>
-
                               <v-list-item-subtitle
-                                v-text="user.username"
+                                v-text="user.name"
                               ></v-list-item-subtitle>
                             </v-list-item-content>
+                            <v-list-item-action>
+                              <v-btn icon @click="addUser(user)">
+                                <v-icon color="grey lighten-1"
+                                  >mdi-plus-circle-outline</v-icon
+                                >
+                              </v-btn>
+                            </v-list-item-action>
                           </v-list-item>
                         </v-list>
-                        <p style="margin:20px">No user</p>
+                        <p v-else style="margin:20px">No user</p>
                         <v-divider></v-divider>
 
                         <v-card-actions>
                           <v-spacer></v-spacer>
-                          <v-btn color="primary" text @click="dialog = false">
+                          <v-btn
+                            color="primary"
+                            text
+                            @click="closeSearchDialog"
+                          >
                             Close
                           </v-btn>
                         </v-card-actions>
@@ -106,6 +118,7 @@
 
 <script>
 import UserService from '@/service/authentication/UserService'
+import IntegrationService from '@/service/integration/IntegrationService'
 
 export default {
   name: 'JUserManagementTab',
@@ -113,7 +126,8 @@ export default {
     return {
       users: [],
       searchedUsers: [],
-      dialog: false
+      dialog: '',
+      searchQuery: ''
     }
   },
   mounted() {
@@ -124,6 +138,19 @@ export default {
       UserService.getAll().then((res) => {
         this.users = res.data
       })
+    },
+    searchUsers(searchQuery) {
+      IntegrationService.searchJiraUsers(searchQuery).then((res) => {
+        this.searchedUsers = res.data
+      })
+    },
+    closeSearchDialog() {
+      this.dialog = false
+      this.searchedUsers = []
+      this.searchQuery = ''
+    },
+    addUser(user) {
+      console.log(user)
     }
   }
 }
