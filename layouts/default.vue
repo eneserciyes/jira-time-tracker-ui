@@ -1,7 +1,7 @@
 <template>
   <v-app dark>
     <v-navigation-drawer
-      v-if="$store.getters.isAuthenticated"
+      v-if="$store.getters.getLoggedInUser.username === 'admin'"
       v-model="drawer"
       color="white"
       :clipped="clipped"
@@ -33,6 +33,7 @@
       app
     >
       <v-app-bar-nav-icon
+        v-if="$store.getters.getLoggedInUser.username === 'admin'"
         style="color: #26547c"
         @click="drawer = !drawer"
       ></v-app-bar-nav-icon>

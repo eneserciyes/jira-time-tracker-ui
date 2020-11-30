@@ -36,7 +36,7 @@
                         ></v-text-field>
                         <v-btn @click="searchUsers(searchQuery)">Search</v-btn>
                         <h3 style="margin:20px">User List</h3>
-                        <v-list two-line v-if="searchedUsers">
+                        <v-list v-if="searchedUsers" two-line>
                           <v-list-item
                             v-for="user in searchedUsers"
                             :key="user.resourceId"
@@ -58,7 +58,7 @@
                               ></v-list-item-subtitle>
                             </v-list-item-content>
                             <v-list-item-action>
-                              <v-btn icon @click="addUser(user)">
+                              <v-btn v-bind="attrs" icon @click="addUser(user)">
                                 <v-icon color="grey lighten-1"
                                   >mdi-plus-circle-outline</v-icon
                                 >
@@ -113,6 +113,14 @@
         </v-list>
       </v-col>
     </v-row>
+    <v-snackbar v-model="snackbar">
+      User is added
+      <template v-slot:action="{ attrs }">
+        <v-btn color="pink" text v-bind="attrs" @click="snackbar = false">
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
   </v-card>
 </template>
 
@@ -127,7 +135,8 @@ export default {
       users: [],
       searchedUsers: [],
       dialog: '',
-      searchQuery: ''
+      searchQuery: '',
+      snackbar: false
     }
   },
   mounted() {
@@ -150,7 +159,13 @@ export default {
       this.searchQuery = ''
     },
     addUser(user) {
-      console.log(user)
+      UserService.registerJiraUser(user)
+        .then((res) => {
+          if (res.status === 200) this.snackbar = true
+        })
+        .then((res) => {
+          this.getUsers()
+        })
     }
   }
 }

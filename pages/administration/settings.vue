@@ -41,12 +41,6 @@ export default {
           tabItem: 'j-user-management-tab'
         },
         {
-          key: 'groupManagement',
-          label: 'Group Management',
-          icon: require('~/assets/group-management.svg'),
-          tabItem: 'j-group-management-tab'
-        },
-        {
           key: 'scheduler',
           label: 'Scheduler',
           icon: require('~/assets/scheduler.svg'),

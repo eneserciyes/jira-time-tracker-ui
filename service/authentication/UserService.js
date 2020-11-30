@@ -10,6 +10,9 @@ export default {
   register(body) {
     return Api().post('/authentication/users', body)
   },
+  registerJiraUser(body) {
+    return Api().post('/authentication/users/jira', body)
+  },
   update(body) {
     return Api().put('/authentication/users', body)
   }

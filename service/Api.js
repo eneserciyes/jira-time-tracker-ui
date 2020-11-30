@@ -4,7 +4,10 @@ import Cookie from 'js-cookie'
 export default () => {
   const cookieToken = Cookie.get('X-Auth-Token')
   const authToken = cookieToken ? 'Bearer ' + cookieToken : ''
-  const authUsername = JSON.parse(Cookie.get('X-Auth-User')).username
+  let authUsername = ''
+  if (Cookie.get('X-Auth-User') != null) {
+    authUsername = JSON.parse(Cookie.get('X-Auth-User')).username
+  }
 
   return axios.create({
     baseURL: process.env.baseURL,

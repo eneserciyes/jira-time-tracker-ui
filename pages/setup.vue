@@ -424,6 +424,7 @@ export default {
       this.route()
     },
     createAdmin() {
+      debugger
       UserService.register({
         username: this.adminUsername,
         password: this.adminPassword,

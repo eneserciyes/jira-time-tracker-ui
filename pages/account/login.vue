@@ -82,6 +82,7 @@ export default {
       this.$nuxt.$loading.start()
       const _this = this
       if (this.username && this.password) {
+        debugger
         AuthenticationService.authenticate({
           username: _this.username,
           password: _this.password
